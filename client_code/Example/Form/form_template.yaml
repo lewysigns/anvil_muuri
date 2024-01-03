@@ -1,9 +1,15 @@
 container:
   type: ColumnPanel
   event_bindings: {show: form_show}
+  properties: {role: null}
 components:
-- name: board_1
+- name: board
   properties: {}
-  type: form:board
+  type: form:DragGrid
   layout_properties: {grid_position: 'NMKLVU,BAHKVO'}
+- name: button_1
+  properties: {text: button_1}
+  type: Button
+  layout_properties: {grid_position: 'KBBHCB,YGEAHN'}
+  event_bindings: {click: button_1_click}
 is_package: true

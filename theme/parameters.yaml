@@ -7,3 +7,4 @@ roles:
 - {name: board}
 - {name: drag-containter}
 - {name: board-column}
+- {name: board-column-container}

@@ -1,7 +1,7 @@
 allow_embedding: false
-package_name: Custom_HTML_1
-startup: {type: form, module: template}
-name: Custom HTML 1
+package_name: Muuri
+startup: {type: form, module: Example.Form}
+name: Muuri
 startup_form: null
 native_deps: {head_html: '<script src="https://cdn.jsdelivr.net/npm/muuri@0.9.3/dist/muuri.min.js"></script>'}
 runtime_options: {version: 2, client_version: '3', server_version: python3-full, server_spec: null}

@@ -6,7 +6,7 @@ components:
   layout_properties: {grid_position: 'TYFLQP,WGRUZW', full_width_row: true}
   components:
   - name: container
-    properties: {role: drag-containter}
+    properties: {role: board-column-container}
     type: ColumnPanel
     layout_properties: {grid_position: 'TWBCNY,POPVZY', full_width_row: true}
     components:

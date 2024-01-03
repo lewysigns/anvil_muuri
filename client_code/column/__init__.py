@@ -15,7 +15,6 @@ class column(columnTemplate):
     if data.get('items'):
       self.set_items(data.get('items'))
         
-
   def set_width(self,width):
     dom_node = js.get_dom_node(self)
     dom_node.style.width = width
