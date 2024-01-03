@@ -1,1 +1,9 @@
-roles: []
+roles:
+- {name: board-item}
+- {name: board-column-header}
+- {name: board-column-content-wrapper}
+- {name: board-column-content}
+- {name: board-item-content}
+- {name: board}
+- {name: drag-containter}
+- {name: board-column}
