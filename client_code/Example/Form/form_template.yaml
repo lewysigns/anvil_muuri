@@ -1,7 +1,7 @@
 container:
   type: ColumnPanel
   event_bindings: {show: form_show}
-  properties: {role: null}
+  properties: {role: null, wrap_on: never}
 components:
 - name: board
   properties: {}

@@ -16,7 +16,7 @@ class DragGrid(DragGridTemplate):
     self.board = board
 
   def add_column(self,column):
-    self.board.board.add_component(column)
+    self.board.add_component(column)
     self.columns.append(column)
     self.update_column_widths()
 

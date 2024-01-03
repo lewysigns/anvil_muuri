@@ -1,9 +1,5 @@
 container:
   type: ColumnPanel
-  properties: {role: drag-containter}
-components:
-- name: board
-  properties: {role: board, wrap_on: never}
-  type: ColumnPanel
-  layout_properties: {grid_position: 'KUMKHS,RMDFGO', full_width_row: true}
+  properties: {role: board}
+components: []
 is_package: true

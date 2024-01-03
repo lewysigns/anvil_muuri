@@ -19,12 +19,13 @@ body {
 }
 .anvil-role-board {
   position: relative;
+  height: 100vh;
 }
 .anvil-role-board-column {
   position: absolute;
   left: 0;
   top: 0;
-  width: 100%;
+  width: 20%;
   padding: 0 10px;
   z-index: 1;
 }
