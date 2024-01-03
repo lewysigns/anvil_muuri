@@ -1,0 +1,7 @@
+container: {type: ColumnPanel}
+components:
+- name: label_1
+  properties: {text: test}
+  type: Label
+  layout_properties: {grid_position: 'SPPKNA,CQNTNX'}
+is_package: true

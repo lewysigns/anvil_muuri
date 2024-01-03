@@ -1,0 +1,9 @@
+container:
+  type: ColumnPanel
+  event_bindings: {show: form_show}
+components:
+- name: board_1
+  properties: {}
+  type: form:board
+  layout_properties: {grid_position: 'NMKLVU,BAHKVO'}
+is_package: true
