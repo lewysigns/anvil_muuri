@@ -15,11 +15,18 @@ class Form(FormTemplate):
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
+    
     data = [
       {'header':"column 1",'background':'','items':[ItemForm('test 1'),ItemForm('test 2')]},
       {'header':"column 2",'background':'blue','items':[ItemForm('test 3'),ItemForm('test 6')]},
       {'header':"column 3",'background':'green','items':[ItemForm('test 4'),ItemForm('test 5')]},
-      {'header':"column 4",'background':'green','items':[ItemForm('test 42'),ItemForm('test 10')]}
+      {'header':Label(text="TESTING"),'background':'green','items':[ItemForm('test 42'),ItemForm('test 10')]}
     ]
     self.grid = Board(data)
     self.add_component(self.grid)
+    self.grid.add_event_handler('x-items_changed',self.handle_change)
+
+  def handle_change(self,muuri,item,**event_args):
+    item.background='blue'
+    item.label_1.remove_from_parent()
+    self.grid.drag_release_end(muuri,raise_event=False)

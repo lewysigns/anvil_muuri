@@ -8,3 +8,4 @@ class ItemForm(ItemFormTemplate):
 
     # Any code you write here will run before the form opens.
     self.label_1.text =label
+    self.label_1.align = 'center'
