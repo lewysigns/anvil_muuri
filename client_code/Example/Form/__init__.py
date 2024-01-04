@@ -1,6 +1,8 @@
 from ._anvil_designer import FormTemplate
 from anvil import *
 
+from anvil import js
+
 from ..ItemForm import ItemForm
 
 from ...template_column import template_column
@@ -17,6 +19,7 @@ class Form(FormTemplate):
       #{'header':"column 2",'background':'blue','items':[ItemForm('test 3'),ItemForm('test 6')]},
       #{'header':"column 3",'background':'green','items':[ItemForm('test 4'),ItemForm('test 5')]}
     ]
+    self.items = []
     for row in data:
       header = Label(text=row['header'],background=row['background'])
       column = template_column()
@@ -24,10 +27,11 @@ class Form(FormTemplate):
       for item in row['items']:
         I = template_item()
         I.add_component(item,slot="item-slot")
+        self.items.append(I)
         column.add_component(I,slot="content-slot")
       self.grid.add_component(column,slot="board-slot")
       
 
   def button_1_click(self, **event_args):
     """This method is called when the button is clicked"""
-    self.grid.create_board()
+    self.grid.create_board([js.get_dom_node(i) for i in self.items],)

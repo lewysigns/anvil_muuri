@@ -11,6 +11,6 @@ class template_grid(template_gridTemplate):
     # Any code you write here will run before the form opens.
 
 
-  def create_board(self, **event_args):
+  def create_board(self,items, **event_args):
     """This method is called when the form is shown on the page"""
-    js.call_js('create_board')
+    js.call_js('create_board',items)
