@@ -1,10 +1,9 @@
 container:
   type: HtmlTemplate
   properties: {html: "  <div class=\"board-column\">\n    <div class=\"board-column-container\"\
-      >\n      <div class=\"board-column-header\">\n        <!--- <div anvil-name=\"\
-      header\" anvil-slot=\"header\"></div> --->\n      </div>\n      <div class=\"\
-      board-column-content-wrapper\">\n        <div class=\"board-column-content\"\
-      >\n           <!--- <div anvil-name=\"content\" anvil-slot=\"content\"></div>\
-      \ --->\n        </div>\n      </div>\n    </div>\n  </div>"}
+      >\n      <div class=\"board-column-header\">\n        <div anvil-slot=\"header\"\
+      ></div>\n      </div>\n      <div class=\"board-column-content-wrapper\">\n\
+      \        <div class=\"board-column-content\">\n           <div anvil-slot=\"\
+      content\"></div>\n        </div>\n      </div>\n    </div>\n  </div>"}
 components: []
 is_package: true

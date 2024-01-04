@@ -4,16 +4,16 @@ container:
       \  <div class=\"board-column\">\n    <div class=\"board-column-container\">\n\
       \      <div class=\"board-column-header\"></div>\n      <div class=\"board-column-content-wrapper\"\
       >\n        <div class=\"board-column-content\">\n          <div class=\"board-item\"\
-      ><div class=\"board-item-content\"></div></div>\n          <div class=\"board-item\"\
-      ><div class=\"board-item-content\"><span>Item #</span>2</div></div>\n      \
-      \    <div class=\"board-item\"><div class=\"board-item-content\"><span>Item\
-      \ #</span>3</div></div>\n          <div class=\"board-item\"><div class=\"board-item-content\"\
-      ><span>Item #</span>4</div></div>\n          <div class=\"board-item\"><div\
-      \ class=\"board-item-content\"><span>Item #</span>5</div></div>\n        </div>\n\
-      \      </div>\n    </div>\n  </div>\n  <div class=\"board-column working\">\n\
-      \    <div class=\"board-column-container\">\n      <div class=\"board-column-header\"\
-      >Working</div>\n      <div class=\"board-column-content-wrapper\">\n       \
-      \ <div class=\"board-column-content\">\n          <div class=\"board-item\"\
+      >\n            <div class=\"board-item-content\"></div>\n          </div>\n\
+      \          <div class=\"board-item\"><div class=\"board-item-content\"><span>Item\
+      \ #</span>2</div></div>\n          <div class=\"board-item\"><div class=\"board-item-content\"\
+      ><span>Item #</span>3</div></div>\n          <div class=\"board-item\"><div\
+      \ class=\"board-item-content\"><span>Item #</span>4</div></div>\n          <div\
+      \ class=\"board-item\"><div class=\"board-item-content\"><span>Item #</span>5</div></div>\n\
+      \        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"board-column\
+      \ working\">\n    <div class=\"board-column-container\">\n      <div class=\"\
+      board-column-header\">Working</div>\n      <div class=\"board-column-content-wrapper\"\
+      >\n        <div class=\"board-column-content\">\n          <div class=\"board-item\"\
       ><div class=\"board-item-content\"><span>Item #</span>6</div></div>\n      \
       \    <div class=\"board-item\"><div class=\"board-item-content\"><span>Item\
       \ #</span>7</div></div>\n          <div class=\"board-item\"><div class=\"board-item-content\"\

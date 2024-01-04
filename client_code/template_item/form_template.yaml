@@ -1,7 +1,6 @@
 container:
   type: HtmlTemplate
   properties: {html: "<div class=\"board-item\">\n  <div class=\"board-item-content\"\
-      >\n    <div anvil-name=\"item_content\" anvil-slot=\"default\"></div>\n  </div>\n\
-      </div>"}
+      >\n    <div anvil-slot=\"item\"></div>\n  </div>\n</div>"}
 components: []
 is_package: true
