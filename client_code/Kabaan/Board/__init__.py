@@ -33,20 +33,20 @@ class Board(BoardTemplate):
     self.add_component(column,slot="board-slot")
     self._columns.append(column)
 
-  def drag_sort(self):
+  def drag_sort(self,item):
     return self.grids
 
-  def drag_init(self,item):
-    item.getElement().style.width = item.getWidth() + 'px'
-    item.getElement().style.height = item.getHeight() + 'px'
+  def drag_init(self,item,*args):
+    item.getElement().style.width = str(item.getWidth()) + 'px'
+    item.getElement().style.height = str(item.getHeight()) + 'px'
 
   def drag_release_end(self,item):
     item.getElement().style.width = ''
     item.getElement().style.height = ''
     item.getGrid().refreshItems([item])
 
-  def layout_start(self,item):
-    pass
+  def layout_start(self,item,*args):
+    self.board.refreshItems().layout();
     
   def create_board(self,**event_args):
     """This method is called when the form is shown on the page"""
@@ -67,31 +67,26 @@ class Board(BoardTemplate):
     
     print("Create Containers")
     for idx,container in enumerate(itemContainers):
-      grid = Muuri(containier,{
+      grid = Muuri(container,{
         'items': items[idx],
         'dragEnabled':True,
         'dragSort': self.drag_sort,
         'dragContainer':dragContainer, 
-      })
-      grid.on('layoutStart', function () {
-        
-      });
-      
+      })      
+      grid.on('dragInit',self.drag_init)
+      grid.on('dragReleaseEnd',self.drag_release_end)
+      grid.on('layoutStart',self.layout_start)
       self.grids.append(grid)
-    });
+      
     print("Grids Added")
     #// Init board grid so we can drag those columns around.
     print("Adding Board")
     self.board = Muuri('.board', {
-      items: columns,
+      'items': columns,
       'dragEnabled': True,
       'dragHandle': '.board-column-header'
-    }); 
+    })
     print("Done!")
-  
-
-  
-
 
   def get_columns(self):
     return [column.get_column_node() for column in self._columns]
