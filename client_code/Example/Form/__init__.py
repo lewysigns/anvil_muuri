@@ -1,8 +1,6 @@
 from ._anvil_designer import FormTemplate
 from anvil import *
 
-from ...column import column
-from ...board import board
 from ..ItemForm import ItemForm
 
 class Form(FormTemplate):
