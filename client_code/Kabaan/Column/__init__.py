@@ -26,4 +26,8 @@ class Column(ColumnTemplate):
 
   def get_column_node(self):
     return js.get_dom_node(self).querySelector(".board-column")
+
+  def set_width(self,num):
+    node = js.get_dom_node(self).querySelector(".board-column")
+    node.style.width = f"calc(100%/{num})"
     

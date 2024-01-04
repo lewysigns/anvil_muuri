@@ -18,12 +18,8 @@ class Form(FormTemplate):
     data = [
       {'header':"column 1",'background':'','items':[ItemForm('test 1'),ItemForm('test 2')]},
       {'header':"column 2",'background':'blue','items':[ItemForm('test 3'),ItemForm('test 6')]},
-      {'header':"column 3",'background':'green','items':[ItemForm('test 4'),ItemForm('test 5')]}
+      {'header':"column 3",'background':'green','items':[ItemForm('test 4'),ItemForm('test 5')]},
+      {'header':"column 4",'background':'green','items':[ItemForm('test 42'),ItemForm('test 10')]}
     ]
-
-
-      
-
-  def button_1_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    self.grid.create_board()
+    self.grid = Board(data)
+    self.add_component(self.grid)

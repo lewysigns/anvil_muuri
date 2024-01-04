@@ -2,14 +2,5 @@ container:
   type: ColumnPanel
   event_bindings: {}
   properties: {role: null, wrap_on: never}
-components:
-- name: grid
-  properties: {}
-  type: form:Kabaan.Board
-  layout_properties: {grid_position: 'ETPHSE,LCBHCN'}
-- name: button_1
-  properties: {text: button_1}
-  type: Button
-  layout_properties: {grid_position: 'KBBHCB,YGEAHN'}
-  event_bindings: {click: button_1_click}
+components: []
 is_package: true
