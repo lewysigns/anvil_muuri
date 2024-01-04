@@ -32,24 +32,25 @@ container:
       \ none;\n  }\n}\n</style>\n\n<script>\nfunction create_board(items,columns){\n\
       \  console.log(\"Start\")\n  var dragContainer = document.querySelector('.drag-container');\n\
       \  var itemContainers = [].slice.call(document.querySelectorAll('.board-column-content'));\n\
-      \  var columnGrids = [];\n  var boardGrid;\n  \n  console.log(\"Create Containers\"\
-      )\n  // Init the column grids so we can drag those items around.\n  itemContainers.forEach(function\
-      \ (container) {\n    console.log(\"Adding Container\")\n    var grid = new Muuri(container,\
-      \ {\n      items: items, //'.board-item',\n      dragEnabled: true,\n      dragSort:\
-      \ function () {\n        return columnGrids;\n      },\n      dragContainer:\
-      \ dragContainer,\n      dragAutoScroll: {\n        targets: (item) => {\n  \
-      \        return [\n            { element: window, priority: 0 },\n         \
-      \   { element: item.getGrid().getElement().parentNode, priority: 1 },\n    \
-      \      ];\n        }\n      },\n    })\n    .on('dragInit', function (item)\
-      \ {\n      item.getElement().style.width = item.getWidth() + 'px';\n      item.getElement().style.height\
-      \ = item.getHeight() + 'px';\n    })\n    .on('dragReleaseEnd', function (item)\
-      \ {\n      item.getElement().style.width = '';\n      item.getElement().style.height\
-      \ = '';\n      item.getGrid().refreshItems([item]);\n    })\n    .on('layoutStart',\
-      \ function () {\n      boardGrid.refreshItems().layout();\n    });\n    \n \
-      \   columnGrids.push(grid);\n  });\n  console.log(\"Grids Added\")\n  // Init\
-      \ board grid so we can drag those columns around.\n  console.log(\"Adding Board\"\
-      )\n  boardGrid = new Muuri('.board', {\n    items: columns,\n    dragEnabled:\
-      \ false,\n    dragHandle: null\n  }); \n  console.log(\"Done!\")\n}\n\n</script>"}
+      \  var columnGrids = [];\n  var boardGrid;\n  var itemIndex = 0;\n  \n  console.log(\"\
+      Create Containers\")\n  // Init the column grids so we can drag those items\
+      \ around.\n  itemContainers.forEach(function (container) {\n    console.log(\"\
+      Adding Container\")\n    var grid = new Muuri(container, {\n      items: items[itemIndex],\
+      \ //'.board-item',\n      dragEnabled: true,\n      dragSort: function () {\n\
+      \        return columnGrids;\n      },\n      dragContainer: dragContainer,\n\
+      \      dragAutoScroll: {\n        targets: (item) => {\n          return [\n\
+      \            { element: window, priority: 0 },\n            { element: item.getGrid().getElement().parentNode,\
+      \ priority: 1 },\n          ];\n        }\n      },\n    })\n    .on('dragInit',\
+      \ function (item) {\n      item.getElement().style.width = item.getWidth() +\
+      \ 'px';\n      item.getElement().style.height = item.getHeight() + 'px';\n \
+      \   })\n    .on('dragReleaseEnd', function (item) {\n      item.getElement().style.width\
+      \ = '';\n      item.getElement().style.height = '';\n      item.getGrid().refreshItems([item]);\n\
+      \    })\n    .on('layoutStart', function () {\n      boardGrid.refreshItems().layout();\n\
+      \    });\n    \n    columnGrids.push(grid);\n    itemIndex += 1\n  });\n  console.log(\"\
+      Grids Added\")\n  // Init board grid so we can drag those columns around.\n\
+      \  console.log(\"Adding Board\")\n  boardGrid = new Muuri('.board', {\n    items:\
+      \ columns,\n    dragEnabled: true,\n    dragHandle: '.board-column-header'\n\
+      \  }); \n  console.log(\"Done!\")\n}\n\n</script>"}
   event_bindings: {}
 components: []
 is_package: true
