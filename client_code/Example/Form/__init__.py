@@ -23,7 +23,7 @@ class Form(FormTemplate):
     for row in data:
       header = Label(text=row['header'],background=row['background'])
       column = template_column()
-      column.add_component(header,slot="header-slot")
+      #column.add_component(header,slot="header-slot")
       for item in row['items']:
         I = template_item()
         I.add_component(item,slot="item-slot")
@@ -34,4 +34,6 @@ class Form(FormTemplate):
 
   def button_1_click(self, **event_args):
     """This method is called when the button is clicked"""
-    self.grid.create_board([js.get_dom_node(i) for i in self.items],)
+    items = [js.get_dom_node(i).querySelector(".board-item") for i in self.items]
+    board = js.get_dom_node(self.grid).querySelector(".board-column")
+    self.grid.create_board(items,board)
