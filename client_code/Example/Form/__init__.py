@@ -3,6 +3,9 @@ from anvil import *
 
 from ..ItemForm import ItemForm
 
+from ...template_column import template_column
+from ...template_item import template_item
+
 class Form(FormTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
@@ -14,19 +17,17 @@ class Form(FormTemplate):
       {'header':"column 2",'background':'blue','items':[ItemForm('test 3'),ItemForm('test 6')]},
       #{'header':"column 3",'background':'green','items':[ItemForm('test 4'),ItemForm('test 5')]}
     ]
-    _board = board()
-    self.board.set_board(_board)
-    self.add_component(_board)
-    columns = [column(d) for d in data]
-    for col in columns:
-      self.board.add_column(col)
-
-  def form_show(self, **event_args):
-    """This method is called when the form is shown on the page"""
-    pass#self.board.create_board()
+    for row in data:
+      header = Label(text=row['header'],background=row['background'])
+      column = template_column()
+      #column.add_component(header,slot="header")
+      #for item in row['items']:
+      #  I = template_item()
+      #  I.add_component(item,slot="default")
+      #  column.add_component(I,slot="content")
+      self.grid.add_component(column,slot="board")
+      
 
   def button_1_click(self, **event_args):
     """This method is called when the button is clicked"""
-    self.board.create_board()
-
-  
+    self.grid.create_board()

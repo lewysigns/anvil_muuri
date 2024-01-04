@@ -1,34 +1,7 @@
 container:
   type: HtmlTemplate
-  properties: {html: "<div class=\"board-item\"><div class=\"board-item-content\"\
-      \ anvil-name=\"item_content\" anvil-slot=\"default\"></div>\n\n\n<style>\n \
-      \ * {\n  box-sizing: border-box;\n}\nhtml, body {\n  position: relative;\n \
-      \ width: 100%;\n  height: 100%;\n  font-family: Helvetica, Arial, sans-serif;\n\
-      }\nbody {\n  margin: 0;\n  padding: 20px 10px;\n}\n.drag-container {\n  position:\
-      \ fixed;\n  left: 0;\n  top: 0;\n  z-index: 1000;\n}\n.board {\n  position:\
-      \ relative;\n}\n.board-column {\n  position: absolute;\n  left: 0;\n  top: 0;\n\
-      \  padding: 0 10px;\n  width: calc(100% / 3);\n  z-index: 1;\n}\n.board-column.muuri-item-releasing\
-      \ {\n  z-index: 2;\n}\n.board-column.muuri-item-dragging {\n  z-index: 3;\n\
-      \  cursor: move;\n}\n.board-column-container {\n  position: relative;\n  width:\
-      \ 100%;\n  height: 100%;\n}\n.board-column-header {\n  position: relative;\n\
-      \  height: 50px;\n  line-height: 50px;\n  overflow: hidden;\n  padding: 0 20px;\n\
-      \  text-align: center;\n  background: #333;\n  color: #fff;\n  border-radius:\
-      \ 5px 5px 0 0;\n  font-weight: bold;\n  letter-spacing: 0.5px;\n  text-transform:\
-      \ uppercase;\n}\n@media (max-width: 600px) {\n  .board-column-header {\n   \
-      \ text-indent: -1000px;\n  }\n}\n.board-column.todo .board-column-header {\n\
-      \  background: #4A9FF9;\n}\n.board-column.working .board-column-header {\n \
-      \ background: #f9944a;\n}\n.board-column.done .board-column-header {\n  background:\
-      \ #2ac06d;\n}\n.board-column-content-wrapper {\n  position: relative;\n  padding:\
-      \ 8px;\n  background: #f0f0f0;\n  height: calc(100vh - 90px);\n  overflow-y:\
-      \ auto;\n  border-radius: 0 0 5px 5px;\n}\n.board-column-content {\n  position:\
-      \ relative;\n  min-height: 100%;\n}\n.board-item {\n  position: absolute;\n\
-      \  width: calc(100% - 16px);\n  margin: 8px;\n}\n.board-item.muuri-item-releasing\
-      \ {\n  z-index: 9998;\n}\n.board-item.muuri-item-dragging {\n  z-index: 9999;\n\
-      \  cursor: move;\n}\n.board-item.muuri-item-hidden {\n  z-index: 0;\n}\n.board-item-content\
-      \ {\n  position: relative;\n  padding: 20px;\n  background: #fff;\n  border-radius:\
-      \ 4px;\n  font-size: 17px;\n  cursor: pointer;\n  -webkit-box-shadow: 0px 1px\
-      \ 3px 0 rgba(0,0,0,0.2);\n  box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);\n}\n\
-      @media (max-width: 600px) {\n  .board-item-content {\n    text-align: center;\n\
-      \  }\n  .board-item-content span {\n    display: none;\n  }\n}\n</style>"}
+  properties: {html: "<div class=\"board-item\">\n  <div class=\"board-item-content\"\
+      >\n    <div anvil-name=\"item_content\" anvil-slot=\"default\"></div>\n  </div>\n\
+      </div>"}
 components: []
 is_package: true
