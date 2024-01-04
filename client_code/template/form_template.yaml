@@ -75,8 +75,8 @@ container:
       \ = '';\n      item.getElement().style.height = '';\n      item.getGrid().refreshItems([item]);\n\
       \    })\n    .on('layoutStart', function () {\n      boardGrid.refreshItems().layout();\n\
       \    });\n  \n    columnGrids.push(grid);\n  });\n  \n  // Init board grid so\
-      \ we can drag those columns around.\n  \n  boardGrid = new Muuri('.board', {\n\
-      \    dragEnabled: true,\n    dragHandle: '.board-column-header'\n  });\n}\n\n\
+      \ we can drag those columns around.\n  boardGrid = new Muuri('.board', {\n \
+      \   dragEnabled: true,\n    dragHandle: '.board-column-header'\n  });\n}\n\n\
       </script>"}
   event_bindings: {show: form_show}
 components: []
