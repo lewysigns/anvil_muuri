@@ -5,8 +5,8 @@ container:
 components:
 - name: grid
   properties: {}
-  type: form:template_grid
-  layout_properties: {grid_position: 'CBOQKM,PSGBXW', full_width_row: true}
+  type: form:Kabaan.Board
+  layout_properties: {grid_position: 'ETPHSE,LCBHCN'}
 - name: button_1
   properties: {text: button_1}
   type: Button
