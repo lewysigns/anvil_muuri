@@ -5,8 +5,6 @@ from anvil import js
 
 from ..ItemForm import ItemForm
 
-from ...Kabaan.Column import Column
-from ...Kabaan.Item import Item
 from ...Kabaan.Board import Board
 
 class Form(FormTemplate):
