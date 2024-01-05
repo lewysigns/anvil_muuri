@@ -49,7 +49,6 @@ class Board(BoardTemplate):
     item.getGrid().refreshItems([item])
     item_id = item.getElement().getAttribute('item_id')
     column_id = item.getGrid().getElement().getAttribute('column_id')
-    print(dir(item.getGrid().getElement()))
     if raise_event:
       self.raise_event('x-items_changed',muuri=item,item=self._items[item_id],column=self._headers[column_id])
 

@@ -22,16 +22,15 @@ class Form(FormTemplate):
     ]
     
     self.board = Board(data)
-    self.add_component(self.board)
+    self.add_component(self.board,full_width_row=True)
     self.board.add_event_handler('x-items_changed',self.handle_change)
 
   def handle_change(self,**event_args):
     column_name = event_args['column']
     item = event_args['item']
     muuri_item = event_args['muuri']
-    item.label_1.remove_from_parent()
     Notification(f"Item moved to {column_name}").show()
-    
+    item.label_1.visible = column_name in ["column 1","column 3"]
     #
     # You must refresh the grid cache to get the new dimensions
     # when you alter the size of an item by calling 'refreshItems'. 

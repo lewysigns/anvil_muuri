@@ -1,3 +1,17 @@
+properties:
+- {name: data, type: object, important: true, default_binding_prop: true, description: Map defining the content of the board.}
+is_package: true
+events:
+- name: x_items_changed
+  default_event: true
+  description: When an item is dragged and dropped anywhere in the board
+  parameters:
+  - {name: item, description: The Item Content}
+  - {name: muuri, description: The Muuri Item}
+  - {name: column, description: Column Name The Item Moved To}
+toolbox_item: {title: muuri_board, group: Muuri Components}
+custom_component: true
+components: []
 container:
   type: HtmlTemplate
   properties: {html: "<div class=\"drag-container\"></div>\n<div class=\"board\">\n\
@@ -49,5 +63,3 @@ container:
       \ columns,\n    dragEnabled: true,\n    dragHandle: '.board-column-header'\n\
       \  }); \n  console.log(\"Done!\")\n}\n\n</script>"}
   event_bindings: {show: form_show}
-components: []
-is_package: true
