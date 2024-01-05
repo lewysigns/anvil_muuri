@@ -13,7 +13,9 @@ class Board(BoardTemplate):
 
     # Any code you write here will run before the form opens.
     self._columns = [] # Column Templates
-    self._items = {} # Item Content
+    self._headers = {} # Header Map
+    self._items = {} # Item Map
+    
     self.grids = [] # Muuri Grids
     self.board = None 
     self.created = False # Flag to indicate if the board has been created. This determines if the board is built on form_show event.
@@ -22,9 +24,10 @@ class Board(BoardTemplate):
 
   def create_board(self,data):
     for row in data:
-      header = Label(text=row['header'],background=row.get('background'),align='center') if isinstance(row['header'],str) else row['header']
+      header = Label(text=row['header'],align='center') if isinstance(row['header'],str) else row['header']
       column = Column()
-      column.add_header(header)
+      self._headers[column.uid] = header.text
+      column.add_header(header,color=row.get('background'))
       for item in row['items']:
         I = Item()
         I.add_item(item)
@@ -45,8 +48,10 @@ class Board(BoardTemplate):
     item.getElement().style.height = ''
     item.getGrid().refreshItems([item])
     item_id = item.getElement().getAttribute('item_id')
+    column_id = item.getGrid().getElement().getAttribute('column_id')
+    print(dir(item.getGrid().getElement()))
     if raise_event:
-      self.raise_event('x-items_changed',muuri=item,item=self._items[item_id])
+      self.raise_event('x-items_changed',muuri=item,item=self._items[item_id],column=self._headers[column_id])
 
   def layout_start(self,item,*args):
     self.board.refreshItems().layout();

@@ -18,22 +18,24 @@ class Form(FormTemplate):
       {'header':"column 1",'background':'','items':[ItemForm('test 1'),ItemForm('test 2')]},
       {'header':"column 2",'background':'blue','items':[ItemForm('test 3'),ItemForm('test 6')]},
       {'header':"column 3",'background':'green','items':[ItemForm('test 4'),ItemForm('test 5')]},
-      {'header':Label(text="TESTING"),'background':'green','items':[ItemForm('test 42'),ItemForm('test 10')]}
+      {'header':Label(text="column 4",align="center",foreground='black'),'background':'yellow','items':[ItemForm('test 42'),ItemForm('test 10')]}
     ]
     
-    self.grid = Board(data)
-    self.add_component(self.grid)
-    self.grid.add_event_handler('x-items_changed',self.handle_change)
+    self.board = Board(data)
+    self.add_component(self.board)
+    self.board.add_event_handler('x-items_changed',self.handle_change)
 
   def handle_change(self,**event_args):
+    column_name = event_args['column']
     item = event_args['item']
-    muuri = event_args['muuri']
-    item.background='blue'
+    muuri_item = event_args['muuri']
     item.label_1.remove_from_parent()
+    Notification(f"Item moved to {column_name}").show()
+    
     #
     # You must refresh the grid cache to get the new dimensions
     # when you alter the size of an item by calling 'refreshItems'. 
     # Then you can update the table layout  by calling 'layout'
     #
-    muuri.getGrid().refreshItems([muuri])
-    muuri.getGrid().layout()
+    muuri_item.getGrid().refreshItems([muuri_item])
+    muuri_item.getGrid().layout()
