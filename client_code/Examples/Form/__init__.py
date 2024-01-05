@@ -3,7 +3,7 @@ from anvil import *
 
 from ..ItemForm import ItemForm
 
-from ...Kabaan.Board import Board
+from ...Kanban.Board import Board
 
 class Form(FormTemplate):
   def __init__(self, **properties):
