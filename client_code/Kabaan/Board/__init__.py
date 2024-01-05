@@ -15,26 +15,28 @@ class Board(BoardTemplate):
     self._columns = [] # Column Templates
     self._headers = {} # Header Map
     self._items = {} # Item Map
+    self._created = False # Flag to indicate if the board has been created. This determines if the board is built on form_show event.
+    self_built = False # Flag to indicate if the board has been built
     
     self.grids = [] # Muuri Grids
     self.board = None 
-    self.created = False # Flag to indicate if the board has been created. This determines if the board is built on form_show event.
     if data:
       self.create_board(data)
 
   def create_board(self,data):
-    for row in data:
-      header = Label(text=row['header'],align='center') if isinstance(row['header'],str) else row['header']
-      column = Column()
-      self._headers[column.uid] = header.text
-      column.add_header(header,color=row.get('background'))
-      for item in row['items']:
-        I = Item()
-        I.add_item(item)
-        column.add_item(I)
-        self._items[I.uid] = item
-      self.add_column(column)
-    self.created = True
+    if not self._created:
+      self._created = True
+      for row in data:
+        header = Label(text=row['header'],align='center') if isinstance(row['header'],str) else row['header']
+        column = Column()
+        self._headers[column.uid] = header.text
+        column.add_header(header,color=row.get('background'))
+        for item in row['items']:
+          I = Item()
+          I.add_item(item)
+          column.add_item(I)
+          self._items[I.uid] = item
+        self.add_column(column)
 
   def drag_sort(self,item):
     return self.grids
@@ -57,44 +59,47 @@ class Board(BoardTemplate):
     
   def build_board(self,draggable_columns=True,**event_args):
     """This method builds the Muuri Board."""
-    #
-    # Adjusting column width based on number of columns in the board
-    #
-    for column in self._columns:
-      column.set_width(len(self._columns))
+    if not self._built:
+      self._built = True
+      #
+      # Adjusting column width based on number of columns in the board
+      #
+      for column in self._columns:
+        column.set_width(len(self._columns))
+        
+      items = [column.get_items() for column in self._columns]
+      columns = self.get_columns()
       
-    items = [column.get_items() for column in self._columns]
-    columns = self.get_columns()
-    
-    #
-    # Instead of the below, it can builtin javascript: js.call_js('create_board',items,columns)
-    # However, there is an advantage of building the events in anvil/python if built here
-    #
-    
-    from anvil.js.window import Muuri
-    
-    dragContainer = js.get_dom_node(self).querySelector('.drag-container')
-    itemContainers = js.get_dom_node(self).querySelectorAll('.board-column-content')
-    self.grid = []
-    
-    for idx,container in enumerate(itemContainers):
-      grid = Muuri(container,{
-        'items': items[idx],
-        'dragEnabled':True,
-        'dragSort': self.drag_sort,
-        'dragContainer':dragContainer, 
-      })      
-      grid.on('dragInit',self.drag_init)
-      grid.on('dragReleaseEnd',self.drag_release_end)
-      grid.on('layoutStart',self.layout_start)
-      self.grids.append(grid)
+      #
+      # Instead of the below, it can builtin javascript: js.call_js('create_board',items,columns)
+      # However, there is an advantage of building the events in anvil/python if built here
+      #
       
-    #// Init board grid so we can drag those columns around.
-    self.board = Muuri('.board', {
-      'items': columns,
-      'dragEnabled': draggable_columns,
-      'dragHandle': '.board-column-header'
-    })
+      from anvil.js.window import Muuri
+      
+      dragContainer = js.get_dom_node(self).querySelector('.drag-container')
+      itemContainers = js.get_dom_node(self).querySelectorAll('.board-column-content')
+      self.grid = []
+      
+      for idx,container in enumerate(itemContainers):
+        grid = Muuri(container,{
+          'items': items[idx],
+          'dragEnabled':True,
+          'dragSort': self.drag_sort,
+          'dragContainer':dragContainer, 
+        })      
+        grid.on('dragInit',self.drag_init)
+        grid.on('dragReleaseEnd',self.drag_release_end)
+        grid.on('layoutStart',self.layout_start)
+        self.grids.append(grid)
+        
+      #// Init board grid so we can drag those columns around.
+      self.board = Muuri('.board', {
+        'items': columns,
+        'dragEnabled': draggable_columns,
+        'dragHandle': '.board-column-header'
+      })
+    
 
   def add_column(self,column):
     self.add_component(column,slot="board-slot")
@@ -105,5 +110,5 @@ class Board(BoardTemplate):
 
   def form_show(self, **event_args):
     """This method is called when the form is shown on the page"""
-    if self.created:
+    if self._created and not self._built:
       self.build_board()
