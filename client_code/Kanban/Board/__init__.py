@@ -16,7 +16,7 @@ class Board(BoardTemplate):
     self._headers = {} # Header Map
     self._items = {} # Item Map
     self._created = False # Flag to indicate if the board has been created. This determines if the board is built on form_show event.
-    self_built = False # Flag to indicate if the board has been built
+    self._built = False # Flag to indicate if the board has been built
     
     self.grids = [] # Muuri Grids
     self.board = None 
