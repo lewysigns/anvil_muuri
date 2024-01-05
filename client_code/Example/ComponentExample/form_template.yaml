@@ -1,0 +1,7 @@
+container: {type: ColumnPanel}
+components:
+- name: board
+  properties: {}
+  type: form:Kabaan.Board
+  layout_properties: {grid_position: 'HMRCJG,MGAYHR', full_width_row: true}
+is_package: true
