@@ -1,15 +1,13 @@
-from ._anvil_designer import FormTemplate
+from ._anvil_designer import ComponentExampleTemplate
 from anvil import *
 
 from ..ItemForm import ItemForm
 
-from ...Kabaan.Board import Board
-
-class Form(FormTemplate):
+class ComponentExample(ComponentExampleTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-
+    # Any code you write here will run before the form opens.
     # Any code you write here will run before the form opens.
     
     data = [
@@ -18,9 +16,7 @@ class Form(FormTemplate):
       {'header':"column 3",'background':'green','items':[ItemForm('test 4'),ItemForm('test 5')]},
       {'header':Label(text="column 4",align="center",foreground='black'),'background':'yellow','items':[ItemForm('test 42'),ItemForm('test 10')]}
     ]
-    
-    self.board = Board(data)
-    self.add_component(self.board,full_width_row=True)
+    self.board.create_board(data)
     self.board.add_event_handler('x-items_changed',self.handle_change)
 
   def handle_change(self,**event_args):
