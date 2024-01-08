@@ -13,6 +13,7 @@ class Item(ItemTemplate):
     self.uid = None
 
   def add_item(self,item):
+    """Add Component to board item"""
     self.add_component(item,slot="item-slot")
     self.set_uid()
 

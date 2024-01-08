@@ -14,15 +14,17 @@ class Column(ColumnTemplate):
     # Any code you write here will run before the form opens.
     self.uid = None
     self.header = ''
-    self.set_uid()
+    self.set_uid() # Generate unique id to be used to find the column component on drag release
 
   def add_header(self,header,color=None):
+    """Add header to column"""
     self.add_component(header,slot='header-slot')
     self.header = header.text
     if color:
       self.dom_nodes['header'].style.backgroundColor = color
     
   def add_item(self,item):
+    """Add item to column, that can be dragged."""
     self.add_component(item,slot="content-slot")
 
   def get_items(self):
@@ -39,6 +41,7 @@ class Column(ColumnTemplate):
     return js.get_dom_node(self).querySelector(".board-column")
 
   def set_width(self,num):
+    """Set Column width"""
     node = js.get_dom_node(self).querySelector(".board-column")
     node.style.width = f"calc(100%/{num})"
 

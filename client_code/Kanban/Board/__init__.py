@@ -24,6 +24,10 @@ class Board(BoardTemplate):
       self.create_board(data)
 
   def create_board(self,data):
+    """
+    This method creates the headers, items, and columns. It then inserts all 
+    the respective components into their html slots.
+    """
     if not self._created:
       self._created = True
       for row in data:
@@ -58,7 +62,10 @@ class Board(BoardTemplate):
     self.board.refreshItems().layout();
     
   def build_board(self,draggable_columns=True,**event_args):
-    """This method builds the Muuri Board."""
+    """
+    This method builds the Muuri Board. It is important that 'create_build' is called before
+    build board. Muuri raises errors if the items cannot be found.
+    """
     if not self._built:
       self._built = True
       #
@@ -88,12 +95,12 @@ class Board(BoardTemplate):
           'dragSort': self.drag_sort,
           'dragContainer':dragContainer, 
         })      
-        grid.on('dragInit',self.drag_init)
-        grid.on('dragReleaseEnd',self.drag_release_end)
-        grid.on('layoutStart',self.layout_start)
+        grid.on('dragInit',self.drag_init) # Adding event handler for drag init of an item
+        grid.on('dragReleaseEnd',self.drag_release_end) # Adding event handler for drag release of an item
+        grid.on('layoutStart',self.layout_start) # Adding event to refresh the board layout
         self.grids.append(grid)
         
-      #// Init board grid so we can drag those columns around.
+      # Init board grid so we can drag those columns around.
       self.board = Muuri('.board', {
         'items': columns,
         'dragEnabled': draggable_columns,
@@ -102,6 +109,7 @@ class Board(BoardTemplate):
     
 
   def add_column(self,column):
+    """ Add column to the board component"""
     self.add_component(column,slot="board-slot")
     self._columns.append(column)
     

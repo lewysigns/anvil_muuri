@@ -4,6 +4,7 @@ from anvil import *
 from ..ItemForm import ItemForm
 
 class ComponentExample(ComponentExampleTemplate):
+  """Example using the Kanban.Board as a component"""
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)

@@ -1,11 +1,12 @@
 from ._anvil_designer import FormTemplate
 from anvil import *
 
-from ..ItemForm import ItemForm
+from ..ItemForm import ItemForm #Example Item Form to be added to a column.
 
 from ...Kanban.Board import Board
 
 class Form(FormTemplate):
+  """Example using the Kanban.Board via code"""
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
