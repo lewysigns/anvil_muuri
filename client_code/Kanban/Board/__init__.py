@@ -15,6 +15,7 @@ class Board(BoardTemplate):
     self._columns = [] # Column Templates
     self._headers = {} # Header Map
     self._items = {} # Item Map
+    self._grids  =  {}  #grid Map
     self._created = False # Flag to indicate if the board has been created. This determines if the board is built on form_show event.
     self._built = False # Flag to indicate if the board has been built
     
@@ -87,6 +88,7 @@ class Board(BoardTemplate):
       dragContainer = js.get_dom_node(self).querySelector('.drag-container')
       itemContainers = js.get_dom_node(self).querySelectorAll('.board-column-content')
       self.grid = []
+      headers = list(self._headers.values())
       
       for idx,container in enumerate(itemContainers):
         grid = Muuri(container,{
@@ -99,6 +101,7 @@ class Board(BoardTemplate):
         grid.on('dragReleaseEnd',self.drag_release_end) # Adding event handler for drag release of an item
         grid.on('layoutStart',self.layout_start) # Adding event to refresh the board layout
         self.grids.append(grid)
+        self._grids[headers[idx]] = grid
         
       # Init board grid so we can drag those columns around.
       self.board = Muuri('.board', {
@@ -115,6 +118,9 @@ class Board(BoardTemplate):
     
   def get_columns(self):
     return [column.get_column_node() for column in self._columns]
+
+  def get_grid(self,grid_name):
+    return self._grids[grid_name]
 
   def form_show(self, **event_args):
     """This method is called when the form is shown on the page"""
