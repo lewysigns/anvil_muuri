@@ -119,6 +119,9 @@ class Board(BoardTemplate):
   def get_columns(self):
     return [column.get_column_node() for column in self._columns]
 
+  def get_item(self,item_id):
+    return self._items[item_id]
+    
   def get_grid(self,grid_name):
     return self._grids[grid_name]
 
