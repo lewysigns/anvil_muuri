@@ -16,6 +16,7 @@ class Item(ItemTemplate):
     """Add Component to board item"""
     self.add_component(item,slot="item-slot")
     self.set_uid()
+    item.item_id = self.uid
 
   def get_item_node(self):
     return js.get_dom_node(self).querySelector(".board-item")
