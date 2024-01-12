@@ -1,88 +1,129 @@
-# About This [Anvil](https://anvil.works/?utm_source=github:app_README) App
+# Anvil Tabulator
+A dependency for anvil.works that wraps the [Muuri](https://github.com/haltu/muuri) library. Currently, this library focuses on creating the Kanban board using the Muuri library, but will grow to other tools.
 
-### Build web apps with nothing but Python.
+This app is available here in github or as a Dependency Clone Link. The dependency contains an example using the Kanban Board in code or in the drag-drop ui.
 
-The app in this repository is built with [Anvil](https://anvil.works?utm_source=github:app_README), the framework for building web apps with nothing but Python. You can clone this app into your own Anvil account to use and modify.
+|||
+|---|---|
+| Dependency Clone Link | [<img src="https://anvil.works/img/forum/copy-app.png" height='40px'>](https://anvil.works/build#clone:AZEAIDUT6YHZWZ2D=4VTJAN6ZGB7KAPSDZCK4YLOF) |
 
-Below, you will find:
-- [How to open this app](#opening-this-app-in-anvil-and-getting-it-online) in Anvil and deploy it online
-- Information [about Anvil](#about-anvil)
-- And links to some handy [documentation and tutorials](#tutorials-and-documentation)
+---
+# Kanban
 
-## Opening this app in Anvil and getting it online
+![Alt text](kabaan.gif)
 
-### Cloning the app
+---
+# Docs
 
-Go to the [Anvil Editor](https://anvil.works/build?utm_source=github:app_README) (you might need to sign up for a free account) and click on “Clone from GitHub” (underneath the “Blank App” option):
-
-<img src="https://anvil.works/docs/version-control-new-ide/img/git/clone-from-github.png" alt="Clone from GitHub"/>
-
-Enter the URL of this GitHub repository. If you're not yet logged in, choose "GitHub credentials" as the authentication method and click "Connect to GitHub".
-
-<img src="https://anvil.works/docs/version-control-new-ide/img/git/clone-app-from-git.png" alt="Clone App from Git modal"/>
-
-Finally, click "Clone App".
-
-This app will then be in your Anvil account, ready for you to run it or start editing it! **Any changes you make will be automatically pushed back to this repository, if you have permission!** You might want to [make a new branch](https://anvil.works/docs/version-control-new-ide?utm_source=github:app_README).
-
-### Running the app yourself:
-
-Find the **Run** button at the top-right of the Anvil editor:
-
-<img src="https://anvil.works/docs/img/run-button-new-ide.png"/>
+- [Creating a Kanban Board](#creating-a-kanban-component)
+- [Defining options](#defining-options)
+- [Events](#events)
+- [Methods](#methods)
 
 
-### Publishing the app on your own URL
+---
+### Creating a Kanban Component
 
-Now you've cloned the app, you can [deploy it on the internet with two clicks](https://anvil.works/docs/deployment/quickstart?utm_source=github:app_README)! Find the **Publish** button at the top-right of the editor:
+In JS Muuri a Muuri instance is defined like:
+```js
+function create_board(items,columns){
+  /*
+    drag Container defines the container of the board to anchor 
+    components when being dragged across the screen.
+  */
+  var dragContainer = document.querySelector('.drag-container');
+  var itemContainers = [].slice.call(document.querySelectorAll('.board-column-content')); // Each Column of your board.
+  var columnGrids = [];
+  var boardGrid;
+  var itemIndex = 0;
+  
+  console.log("Create Containers")
+  // Init the column grids so we can drag those items around.
+  itemContainers.forEach(function (container) {
+    console.log("Adding Container")
+    var grid = new Muuri(container, {
+      items: items[itemIndex], // each item in your columns
+      dragEnabled: true,
+      dragSort: function () {
+        return columnGrids;
+      },
+      dragContainer: dragContainer,
+      dragAutoScroll: {
+        targets: (item) => {
+          return [
+            { element: window, priority: 0 },
+            { element: item.getGrid().getElement().parentNode, priority: 1 },
+          ];
+        }
+      },
+    })
+    .on('dragInit', function (item) {
+      item.getElement().style.width = item.getWidth() + 'px';
+      item.getElement().style.height = item.getHeight() + 'px';
+    }) // Function to call when a drag is initialized
+    .on('dragReleaseEnd', function (item) {
+      item.getElement().style.width = '';
+      item.getElement().style.height = '';
+      item.getGrid().refreshItems([item]);
+    }) //Function to call when a drag is complete
+    .on('layoutStart', function () {
+      boardGrid.refreshItems().layout();
+    }); // Function to call when the board layout is defined.
+    
+    columnGrids.push(grid);
+    itemIndex += 1
+  });
+  // Init board grid so we can drag those columns around.
+  boardGrid = new Muuri('.board', {
+    items: columns,
+    dragEnabled: true,
+    dragHandle: '.board-column-header'
+  }); // Second Muuri board to make your columns movable.
+```
+In Anvil Murri add the Kanban Component in the design view and then set the data and columns at runtime.
 
-<img src="https://anvil.works/docs/deployment-new-ide/img/environments/publish-button.png"/>
+```python
+    data = [
+      {'header':"column 1",'background':'','items':[ItemForm('test 1'),ItemForm('test 2')]},
+      {'header':"column 2",'background':'blue','items':[ItemForm('test 3'),ItemForm('test 6')]},
+      {'header':"column 3",'background':'green','items':[ItemForm('test 4'),ItemForm('test 5')]},
+      {'header':Label(text="column 4",align="center",foreground='black'),'background':'yellow','items':[ItemForm('test 42'),ItemForm('test 10')]}
+    ]
+    self.board.create_board(data)
+```
+The data array defines each column in your Kanban board.
 
-When you click it, you will see the Publish dialog:
+There are three keys to define : ```header```,```background```,```items```. ```header``` will be the text displayed at the header of the column. The ```background``` is the color of the background of your header. ```items``` is an array of components that will show your data. These items are the draggable portions of your board.
 
-<img src="https://anvil.works/docs/deployment-new-ide/img/quickstart/empty-environments-dialog.png"/>
+The Board component will build the board automatically on the ```create_board``` call , if it is in the ```__init__``` function of the parent form. If your data is passed to the Board component AFTER the parent form is initialized, you can manually build the board by calling ```build_board```
 
-Click **Publish This App**, and you will see that your app has been deployed at a new, public URL:
+---
 
-<img src="https://anvil.works/docs/deployment-new-ide/img/quickstart/default-public-environment.png"/>
+### Events
 
-That's it - **your app is now online**. Click the link and try it!
+When an item is dragged and released the ```'x-items_changed'``` event is called. 
 
-## About Anvil
+```python
 
-If you’re new to Anvil, welcome! Anvil is a platform for building full-stack web apps with nothing but Python. No need to wrestle with JS, HTML, CSS, Python, SQL and all their frameworks – just build it all in Python.
+self.board.add_event_handler('x-items_changed',self.handle_change)
 
-<figure>
-<figcaption><h3>Learn About Anvil In 80 Seconds👇</h3></figcaption>
-<a href="https://www.youtube.com/watch?v=3V-3g1mQ5GY" target="_blank">
-<img
-  src="https://anvil-website-static.s3.eu-west-2.amazonaws.com/anvil-in-80-seconds-YouTube.png"
-  alt="Anvil In 80 Seconds"
-/>
-</a>
-</figure>
-<br><br>
+def handle_change(self,**event_args):
+  column_name = event_args['column']
+  item = event_args['item']
+  muuri_item = event_args['muuri']
 
-[![Try Anvil Free](https://anvil-website-static.s3.eu-west-2.amazonaws.com/mark-complete.png)](https://anvil.works?utm_source=github:app_README)
+```
 
-To learn more about Anvil, visit [https://anvil.works](https://anvil.works?utm_source=github:app_README).
+---
 
-## Tutorials and documentation
+### Methods
 
-### Tutorials
+Check the call signatures in the JS Muuri docs for muuri methods that can be called.
 
-If you are just starting out with Anvil, why not **[try the 10-minute Feedback Form tutorial](https://anvil.works/learn/tutorials/feedback-form?utm_source=github:app_README)**? It features step-by-step tutorials that will introduce you to the most important parts of Anvil.
 
-Anvil has tutorials on:
-- [Building Dashboards](https://anvil.works/learn/tutorials/data-science#dashboarding?utm_source=github:app_README)
-- [Multi-User Applications](https://anvil.works/learn/tutorials/multi-user-apps?utm_source=github:app_README)
-- [Building Web Apps with an External Database](https://anvil.works/learn/tutorials/external-database?utm_source=github:app_README)
-- [Deploying Machine Learning Models](https://anvil.works/learn/tutorials/deploy-machine-learning-model?utm_source=github:app_README)
-- [Taking Payments with Stripe](https://anvil.works/learn/tutorials/stripe?utm_source=github:app_README)
-- And [much more....](https://anvil.works/learn/tutorials?utm_source=github:app_README)
-
-### Reference Documentation
-
-The Anvil reference documentation provides comprehensive information on how to use Anvil to build web applications. You can find the documentation [here](https://anvil.works/docs/overview?utm_source=github:app_README).
-
-If you want to get to the basics as quickly as possible, each section of this documentation features a [Quick-Start Guide](https://anvil.works/docs/overview/quickstarts?utm_source=github:app_README).
+```python
+# not available in the autocomplete but can still be called
+muuri_item.getGrid().refreshItems([muuri_item])
+muuri_item.getGrid().layout()
+```
+---
