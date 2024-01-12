@@ -16,7 +16,6 @@ This app is available here in github or as a Dependency Clone Link. The dependen
 # Docs
 
 - [Creating a Kanban Board](#creating-a-kanban-component)
-- [Defining options](#defining-options)
 - [Events](#events)
 - [Methods](#methods)
 
