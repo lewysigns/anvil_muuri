@@ -1,4 +1,4 @@
-# Anvil Tabulator
+# Anvil Muuri
 A dependency for anvil.works that wraps the [Muuri](https://github.com/haltu/muuri) library. Currently, this library focuses on creating the Kanban board using the Muuri library, but will grow to other tools.
 
 This app is available here in github or as a Dependency Clone Link. The dependency contains an example using the Kanban Board in code or in the drag-drop ui.
