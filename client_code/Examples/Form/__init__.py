@@ -37,3 +37,7 @@ class Form(FormTemplate):
     #
     muuri_item.getGrid().refreshItems([muuri_item])
     muuri_item.getGrid().layout()
+
+  def button_add_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    self.board.add_item("column 1",ItemForm('test added'))

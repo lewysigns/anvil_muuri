@@ -116,7 +116,7 @@ class Board(BoardTemplate):
     I.add_item(item)
     self._items[I.uid] = item
     grid = self.get_grid(column_name)
-    muuri_items = grid.add(I)
+    muuri_items = grid.add(I.get_item_node())
     self.raise_event('x-items_changed',muuri=muuri_items[0],item=item,column=column_name)
 
   def add_column(self,column):
