@@ -110,6 +110,14 @@ class Board(BoardTemplate):
         'dragHandle': '.board-column-header'
       })
     
+  def add_item(self,column_name,item):
+    """ Add item to the board component"""
+    I = Item()
+    I.add_item(item)
+    self._items[I.uid] = item
+    grid = self.get_grid(column_name)
+    muuri_items = grid.add(I)
+    self.raise_event('x-items_changed',muuri=muuri_items[0],item=item,column=column_name)
 
   def add_column(self,column):
     """ Add column to the board component"""
