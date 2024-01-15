@@ -33,3 +33,7 @@ class ComponentExample(ComponentExampleTemplate):
     #
     muuri_item.getGrid().refreshItems([muuri_item])
     muuri_item.getGrid().layout()
+
+  def button_1_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    self.label_1.visible = True

@@ -1,5 +1,14 @@
 container: {type: ColumnPanel}
 components:
+- name: button_1
+  properties: {text: button_1}
+  type: Button
+  layout_properties: {grid_position: 'DKGKJP,MLPSQP'}
+  event_bindings: {click: button_1_click}
+- name: label_1
+  properties: {visible: false, text: Test}
+  type: Label
+  layout_properties: {grid_position: 'HMRCJG,BEUDEV'}
 - name: board
   properties: {}
   type: form:Kanban.Board
