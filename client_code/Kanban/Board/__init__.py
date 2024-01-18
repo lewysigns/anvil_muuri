@@ -60,7 +60,8 @@ class Board(BoardTemplate):
       self.raise_event('x-items_changed',muuri=item,item=self._items[item_id],column=self._headers[column_id])
 
   def layout_start(self,item,*args):
-    self.board.refreshItems().layout();
+    if self.board:
+      self.board.refreshItems().layout();
     
   def build_board(self,draggable_columns=True,**event_args):
     """
