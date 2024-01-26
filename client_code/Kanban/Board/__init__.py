@@ -120,6 +120,10 @@ class Board(BoardTemplate):
     muuri_items = grid.add(I.get_item_node())
     self.raise_event('x-items_changed',muuri=muuri_items[0],item=item,column=column_name)
 
+  def remove_item(self,column_name,item):
+    grid = self.get_grid(column_name)
+    grid.remove(item)
+    
   def add_column(self,column):
     """ Add column to the board component"""
     self.add_component(column,slot="board-slot")
