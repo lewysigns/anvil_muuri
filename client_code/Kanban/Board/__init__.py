@@ -121,8 +121,9 @@ class Board(BoardTemplate):
     self.raise_event('x-items_changed',muuri=muuri_items[0],item=item,column=column_name)
 
   def remove_item(self,column_name,item):
-    grid = self.get_grid(column_name)
-    grid.remove(item)
+    if item is not None:
+      grid = self.get_grid(column_name)
+      grid.remove(item)
     
   def add_column(self,column):
     """ Add column to the board component"""
